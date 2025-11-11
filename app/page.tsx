@@ -111,10 +111,10 @@ export default function DashboardPage() {
     router.push('/login')
   }
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>
+  if (loading) return <p className="text-center mt-10 text-black">Loading...</p>
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-6">
+    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-6 text-black">
       <div className="flex justify-between w-full max-w-2xl mb-6">
         <h1 className="text-2xl font-bold">
           Hello, {user?.email || 'Guest'} 👋
@@ -138,19 +138,19 @@ export default function DashboardPage() {
         <input
           type="text"
           placeholder="Title"
-          className="border p-2 w-full mb-2"
+          className="border p-2 w-full mb-2 text-black"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
           required
         />
         <textarea
           placeholder="Description"
-          className="border p-2 w-full mb-2"
+          className="border p-2 w-full mb-2 text-black"
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
         />
         <select
-          className="border p-2 w-full mb-2"
+          className="border p-2 w-full mb-2 text-black"
           value={form.priority}
           onChange={(e) => setForm({ ...form, priority: e.target.value })}
         >
@@ -178,7 +178,7 @@ export default function DashboardPage() {
             <div>
               <h3 className="font-semibold">
                 {task.title}{' '}
-                <span className="text-sm text-gray-500">({task.priority})</span>
+                <span className="text-sm text-gray-600">({task.priority})</span>
               </h3>
               <p>{task.description}</p>
               <label className="text-sm">

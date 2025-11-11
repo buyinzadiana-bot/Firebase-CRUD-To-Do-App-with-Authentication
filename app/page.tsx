@@ -28,6 +28,14 @@ export default function DashboardPage() {
   })
   const [editingTask, setEditingTask] = useState<Task | null>(null)
 
+    const loadTasks = async (email: string) => {
+    const q = query(collection(db, 'tasks'), where('userEmail', '==', email))
+    const snapshot = await getDocs(q)
+    const tasksList = snapshot.docs.map(
+      (doc) => ({ id: doc.id, ...doc.data() } as Task)
+    )
+    setTasks(tasksList)
+  }
   // 🔒 Protect route + load tasks
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -43,14 +51,7 @@ export default function DashboardPage() {
   }, [])
 
   // 🔁 Fetch user-specific tasks
-  const loadTasks = async (email: string) => {
-    const q = query(collection(db, 'tasks'), where('userEmail', '==', email))
-    const snapshot = await getDocs(q)
-    const tasksList = snapshot.docs.map(
-      (doc) => ({ id: doc.id, ...doc.data() } as Task)
-    )
-    setTasks(tasksList)
-  }
+
 
   // ➕ Add or Update Task
   const handleSubmit = async (e: React.FormEvent) => {
